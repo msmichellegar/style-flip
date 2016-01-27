@@ -1,0 +1,34 @@
+.page-wrapper {
+    background-color: #F2F2F2;
+    height: 200vh;
+}
+
+.header-wrapper {
+    background-color: #000;
+    height: 285px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.header {
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: top center;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.content-wrapper {
+    background-color: white;
+    height: 100vh;
+    margin: 150px auto 100px auto;
+    width: 70%;
+}
+
+.title {
+    background-color: pink;
+    height: 300px;
+}

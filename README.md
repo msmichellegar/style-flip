@@ -1,6 +1,6 @@
 # All Frills
 
-A showcase project. Not for the frill-hearted.
+A showcase project. Not for the frill-hearted. Currently under construction [here](http://all-frills.herokuapp.com/).
 
 ### What is this built in?
 
