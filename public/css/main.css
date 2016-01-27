@@ -44,12 +44,39 @@ table {
 button {
   -webkit-appearance: none; }
 
-* {
-  font-family: 'Brown Bold','Helvetica Neue',Helvetica,Arial,sans-serif; }
+body {
+  font-family: 'Montserrat', sans-serif; }
+
+h1 {
+  font-size: 80px; }
+
+h3 {
+  font-size: 26px; }
+
+h4 {
+  font-size: 24px; }
+
+i {
+  color: grey; }
+
+button {
+  background: #000;
+  border: 2px solid #000;
+  border-radius: 0;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1em;
+  padding: 15px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: lowercase;
+  -webkit-appearance: button; }
 
 .page-wrapper {
   background-color: #F2F2F2;
-  height: 200vh; }
+  height: 300vh; }
 
 .header-wrapper {
   background-color: #000;
@@ -57,24 +84,66 @@ button {
   position: absolute;
   top: 0;
   width: 100%; }
+  .header-wrapper .header {
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: top center;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%; }
 
-.header {
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: top center;
-  margin: 0 auto;
-  overflow: hidden;
-  position: relative;
-  width: 100%; }
+.menu {
+  margin: 50px 0 0 150px; }
+  .menu h3 {
+    color: white; }
+  .menu span {
+    border-bottom: 4px solid white; }
 
 .content-wrapper {
-  background-color: white;
-  height: 100vh;
-  margin: 150px auto 100px auto;
+  background-color: #F2F2F2;
+  margin: 50px auto 100px auto;
   width: 70%; }
-
-.title {
-  background-color: pink;
-  height: 300px; }
+  .content-wrapper .title {
+    align-items: center;
+    background-image: url("/static/public/images/vogue.jpg");
+    background-size: cover;
+    box-sizing: border-box;
+    display: flex;
+    height: 400px;
+    padding: 40px 10%; }
+    .content-wrapper .title h1 {
+      color: white;
+      margin-left: 20%; }
+    .content-wrapper .title span {
+      border-bottom: 10px solid white; }
+  .content-wrapper .description {
+    background-color: white;
+    height: 300px;
+    margin: 20px 0 0 0; }
+  .content-wrapper .generator {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 600px;
+    margin: 20px 0 0 0;
+    padding: 20px 0;
+    width: 100%; }
+    .content-wrapper .generator .generator--block {
+      height: 600px;
+      width: 49%; }
+    .content-wrapper .generator .generator--block.main {
+      text-align: center; }
+    .content-wrapper .generator .generator--block.sub {
+      vertical-align: middle; }
+      .content-wrapper .generator .generator--block.sub .button-wrapper {
+        display: block;
+        margin: 20px 0 100px 0;
+        text-align: center; }
+      .content-wrapper .generator .generator--block.sub .item-info-wrapper * {
+        display: block; }
+      .content-wrapper .generator .generator--block.sub .item-info-wrapper .item-title h4, .content-wrapper .generator .generator--block.sub .item-info-wrapper .item-title i, .content-wrapper .generator .generator--block.sub .item-info-wrapper .item-title p {
+        display: inline-block; }
 
 /*# sourceMappingURL=main.css.map */
