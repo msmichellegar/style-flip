@@ -191,8 +191,17 @@ button {
         display: inline-block;
         height: 50px; }
 
-.collection {
-  margin-top: 20px;
+.collection-wrapper {
+  margin-top: 50px;
   text-align: center; }
+
+.collection {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; }
+  .collection .collection--item {
+    background-color: white;
+    height: 350px;
+    width: 33%; }
 
 /*# sourceMappingURL=main.css.map */
