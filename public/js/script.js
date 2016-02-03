@@ -1,5 +1,7 @@
 $(document).ready(function() {
     runFlipBook();
+    getSectionData("tops");
+    getSectionData("bottoms");
 
 });
 
@@ -75,4 +77,13 @@ function flipBottom (direction) {
         $("#bottom-image").attr("src", "/static/public/images/" + bottomImages[bottomImageIndex]);
     }
 
+}
+
+function getSectionData (section) {
+
+    $.ajax('/api/' + section, {
+        success: function(data) {
+            console.log(data);
+        }
+    });
 }
