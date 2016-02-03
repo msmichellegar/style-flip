@@ -168,12 +168,14 @@ button {
   text-align: center; }
 
 .collection {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px; }
+  margin-top: 30px; }
   .collection .collection--item {
     background-color: white;
+    display: inline-block;
     height: 350px;
-    width: 33%; }
+    width: 300px; }
+    .collection .collection--item img {
+      height: 300px;
+      object-fit: cover; }
 
 /*# sourceMappingURL=main.css.map */
