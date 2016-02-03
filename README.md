@@ -1,6 +1,6 @@
-# All Frills
+# All Frills / Flipbook
 
-A showcase project. Not for the frill-hearted. Currently under construction [here](http://all-frills.herokuapp.com/).
+A showcase project. Currently under construction.
 
 ### What is this built in?
 
