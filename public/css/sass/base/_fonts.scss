@@ -29,11 +29,19 @@ body {
 h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 36px;
+
+    @media (max-width: 600px) {
+        font-size: 26px;
+    }
 }
 
 h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 26px;
+
+    @media (max-width: 600px) {
+        font-size: 24px;
+    }
 }
 
 h4 {
@@ -49,6 +57,10 @@ h5 {
 h6 {
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
 }
 
 i {

@@ -38,7 +38,11 @@
     margin: 50px auto 100px auto;
     padding-top: 70px;
     text-align: center;
-    width: 1000px;
+    max-width: 1000px;
+
+    @media (max-width: 600px) {
+        padding: 50px 5px;
+    }
 
     hr {
         background-color: black;
