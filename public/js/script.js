@@ -1,11 +1,7 @@
 $(document).ready(function() {
-
     flipbook.getData([flipbook.initialise, flipbook.enableFlipping]);
 
 });
-
-var topImageIndex = 0;
-var bottomImageIndex = 0;
 
 var flipbook = {
 
@@ -45,140 +41,100 @@ var flipbook = {
 
         });
 
-        return [topData, bottomData];
+        return [topData.sort(), bottomData.sort()];
 
     },
 
     initialise: function initialiseFlipBook(topData, bottomData) {
+        var relatedProducts = [];
 
         // insert first pages of flipbook
-        $("#top-image").attr("src", "/static/public/images/" + topData[0].image);
-        $("#bottom-image").attr("src", "/static/public/images/" + bottomData[0].image);
+        $("#top-image").attr("src", "/static/public/images/" + topData[0].image).addClass("0");
+        $("#bottom-image").attr("src", "/static/public/images/" + bottomData[0].image).addClass("0");
 
-        // insert first related products
-        $("#related-1").attr("src", "/static/public/images/" + topData[0]["related-image-1"]);
-        $("#related-2").attr("src", "/static/public/images/" + topData[0]["related-image-2"]);
-        $("#related-3").attr("src", "/static/public/images/" + topData[0]["related-image-3"]);
-        $("#related-4").attr("src", "/static/public/images/" + bottomData[0]["related-image-1"]);
-        $("#related-5").attr("src", "/static/public/images/" + bottomData[0]["related-image-2"]);
-        $("#related-6").attr("src", "/static/public/images/" + bottomData[0]["related-image-3"]);
+        // create array of related products to initialise with
+        relatedProducts.push(topData[0]["related-image-1"], topData[0]["related-image-2"], topData[0]["related-image-3"], bottomData[0]["related-image-1"], bottomData[0]["related-image-2"], bottomData[0]["related-image-3"]);
+
+        for (var i=0; i < relatedProducts.length; i++) {
+
+            // assign different class to top and bottom products
+            var productClass = i < 3 ? "top-product" : "bottom-product";
+
+            // append related products to collection
+            $(".collection").append("<div class='collection--item " + productClass +"'><img src='/static/public/images/" + relatedProducts[i] + "'/></div>");
+        }
 
     },
 
     enableFlipping: function enableFlipping(topData, bottomData) {
 
         // when clicking on a left button
-        $(".top").click(function() {
-            if ($(".top").hasClass("left")) {
-                flipbook.flipTop("left", topData);
+        $(".left").click(function() {
+            if ($(this).hasClass("top")) {
+                flipbook.flip("left", "top", topData);
             } else {
-                flipbook.flipTop("right", topData);
+                flipbook.flip("left", "bottom", bottomData);
             }
 
         });
 
         // when clicking on a right button
-        $(".bottom").click(function() {
-            if ($(".bottom").hasClass("left")) {
-                flipbook.flipBottom("left", bottomData);
+        $(".right").click(function() {
+            if ($(this).hasClass("top")) {
+                flipbook.flip("right", "top", topData);
             } else {
-                flipbook.flipBottom("right", bottomData);
+                flipbook.flip("right", "bottom", bottomData);
             }
 
         });
     },
 
-    flipTop: function flipTop (direction, topData) {
-        var topImages = [];
-        var firstRelatedProductImages = [];
-        var secondRelatedProductImages = [];
-        var thirdRelatedProductImages = [];
+    flip: function flip (direction, section, data) {
+        var pageImages = [];
+        var relatedProducts = [];
+        var currentIndex = parseInt($("#" + section + "-image").attr("class"));
+        var nextIndex;
 
-        // push images to various arrays
-        topData.forEach(function(page) {
-            topImages.push(page.image);
-            firstRelatedProductImages.push(page["related-image-1"]);
-            secondRelatedProductImages.push(page["related-image-2"]);
-            thirdRelatedProductImages.push(page["related-image-3"]);
+        // push images to relevant arrays
+        data.forEach(function(page) {
+            pageImages.push(page.image);
+            relatedProducts.push([page["related-image-1"], page["related-image-2"], page["related-image-3"]]);
         });
 
+        // determining index of next flipbook page
         if (direction === "left") {
-            if (topImageIndex === 0) {
-                topImageIndex = topImages.length - 1;
+            if (currentIndex === 0) {
+                nextIndex = pageImages.length - 1;
             } else {
-                topImageIndex = topImageIndex - 1;
+                nextIndex = currentIndex - 1;
             }
-
-            // update top image
-            $("#top-image").attr("src", "/static/public/images/" + topImages[topImageIndex]);
-
-            // update related products
-            $("#related-1").attr("src", "/static/public/images/" + firstRelatedProductImages[topImageIndex]);
-            $("#related-2").attr("src", "/static/public/images/" + secondRelatedProductImages[topImageIndex]);
-            $("#related-3").attr("src", "/static/public/images/" + thirdRelatedProductImages[topImageIndex]);
-
         } else {
-            if (topImageIndex === topImages.length - 1) {
-                topImageIndex = 0;
+            if (currentIndex === pageImages.length - 1) {
+                nextIndex = 0;
             } else {
-                topImageIndex = topImageIndex + 1;
+                nextIndex = currentIndex + 1;
             }
-
-            // update top image
-            $("#top-image").attr("src", "/static/public/images/" + topImages[topImageIndex]);
-
-            // update related products
-            $("#related-1").attr("src", "/static/public/images/" + firstRelatedProductImages[topImageIndex]);
-            $("#related-2").attr("src", "/static/public/images/" + secondRelatedProductImages[topImageIndex]);
-            $("#related-3").attr("src", "/static/public/images/" + thirdRelatedProductImages[topImageIndex]);
         }
 
-    },
+        // update page image
+        $("#" + section + "-image").attr("src", "/static/public/images/" + pageImages[nextIndex]).removeClass().addClass(nextIndex.toString());
 
-    flipBottom: function flipBottom (direction, bottomData) {
-        var bottomImages = [];
-        var firstRelatedProductImages = [];
-        var secondRelatedProductImages = [];
-        var thirdRelatedProductImages = [];
+        // remove current related products
+        $("." + section + "-product").remove();
 
-        // push images to various arrays
-        bottomData.forEach(function(page) {
-            bottomImages.push(page.image);
-            firstRelatedProductImages.push(page["related-image-1"]);
-            secondRelatedProductImages.push(page["related-image-2"]);
-            thirdRelatedProductImages.push(page["related-image-3"]);
-        });
+        // insert new related products
+        for (var i=0; i < 3; i++) {
+            var productClass = section === "top" ? "top-product" : "bottom-product";
+            var content = "<div class='collection--item " + productClass + "'><img src='/static/public/images/" + relatedProducts[nextIndex][i] + "'/></div>";
 
-        if (direction === "left") {
-            if (bottomImageIndex === 0) {
-                bottomImageIndex = bottomImages.length - 1;
+            if (section === "top") {
+                $(".collection").prepend(content);
             } else {
-                bottomImageIndex = bottomImageIndex - 1;
+                $(".collection").append(content);
             }
 
-            // update bottom image
-            $("#bottom-image").attr("src", "/static/public/images/" + bottomImages[bottomImageIndex]);
-
-            // update related products
-            $("#related-4").attr("src", "/static/public/images/" + firstRelatedProductImages[bottomImageIndex]);
-            $("#related-5").attr("src", "/static/public/images/" + secondRelatedProductImages[bottomImageIndex]);
-            $("#related-6").attr("src", "/static/public/images/" + thirdRelatedProductImages[bottomImageIndex]);
-
-        } else {
-            if (bottomImageIndex === bottomImages.length - 1) {
-                bottomImageIndex = 0;
-            } else {
-                bottomImageIndex = bottomImageIndex + 1;
-            }
-
-            // update bottom image
-            $("#bottom-image").attr("src", "/static/public/images/" + bottomImages[bottomImageIndex]);
-
-            // update related products
-            $("#related-4").attr("src", "/static/public/images/" + firstRelatedProductImages[bottomImageIndex]);
-            $("#related-5").attr("src", "/static/public/images/" + secondRelatedProductImages[bottomImageIndex]);
-            $("#related-6").attr("src", "/static/public/images/" + thirdRelatedProductImages[bottomImageIndex]);
         }
+
     }
 
 };
