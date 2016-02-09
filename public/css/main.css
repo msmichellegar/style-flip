@@ -143,9 +143,9 @@ button {
 .content-wrapper {
   background-color: white;
   margin: 50px auto 100px auto;
+  max-width: 1000px;
   padding-top: 70px;
-  text-align: center;
-  max-width: 1000px; }
+  text-align: center; }
   @media (max-width: 600px) {
     .content-wrapper {
       padding: 50px 5px; } }
@@ -166,12 +166,28 @@ button {
     flex-wrap: nowrap;
     justify-content: center;
     text-align: center; }
+    @media (max-width: 600px) {
+      .flipbook-wrapper .flipbook .left, .flipbook-wrapper .flipbook .right {
+        margin-top: 20%;
+        padding: 10px;
+        position: absolute; } }
     .flipbook-wrapper .flipbook .left {
       margin-right: 15px; }
+      @media (max-width: 600px) {
+        .flipbook-wrapper .flipbook .left {
+          left: 15px;
+          margin-right: 0; } }
     .flipbook-wrapper .flipbook .right {
       margin-left: 15px; }
+      @media (max-width: 600px) {
+        .flipbook-wrapper .flipbook .right {
+          margin-left: 0;
+          right: 15px; } }
     .flipbook-wrapper .flipbook img {
       width: 70%; }
+      @media (max-width: 600px) {
+        .flipbook-wrapper .flipbook img {
+          width: 100%; } }
   .flipbook-wrapper #top {
     margin-bottom: 10px; }
 
@@ -183,11 +199,31 @@ button {
   margin-top: 30px; }
   .collection .collection--item {
     background-color: white;
+    cursor: pointer;
     display: inline-block;
-    height: 350px;
-    width: 300px; }
+    height: 300px;
+    margin: 15px;
+    position: relative;
+    width: 250px; }
+    .collection .collection--item:hover .view-button {
+      display: block; }
     .collection .collection--item img {
       height: 300px;
+      width: 250px;
       object-fit: cover; }
+    .collection .collection--item .view-button {
+      background-color: #404040;
+      bottom: 0;
+      box-sizing: border-box;
+      color: white;
+      display: none;
+      height: 50px;
+      line-height: 50px;
+      opacity: 0.9;
+      position: absolute;
+      text-decoration: none;
+      width: 100%; }
+    .collection .collection--item .view-button:hover {
+      background-color: black; }
 
 /*# sourceMappingURL=main.css.map */
