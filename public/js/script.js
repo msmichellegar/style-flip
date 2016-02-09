@@ -46,27 +46,19 @@ var flipbook = {
     },
 
     initialise: function initialiseFlipBook(topData, bottomData) {
-        var relatedProducts = [];
+        var relatedProductImages = [];
         var relatedProductLinks = [];
 
-        // insert first pages of flipbook
-        $("#top-image").attr("src", "/static/public/images/" + topData[0].image).addClass("0");
-        $("#bottom-image").attr("src", "/static/public/images/" + bottomData[0].image).addClass("0");
+        flipbook.insertPage("top", "0", [topData[0].image]);
+        flipbook.insertPage("bottom", "0", [bottomData[0].image]);
 
         // create array of related products to initialise with
-        relatedProducts.push(topData[0]["related-image-1"], topData[0]["related-image-2"], topData[0]["related-image-3"], bottomData[0]["related-image-1"], bottomData[0]["related-image-2"], bottomData[0]["related-image-3"]);
+        relatedProductImages.push(topData[0]["related-image-1"], topData[0]["related-image-2"], topData[0]["related-image-3"], bottomData[0]["related-image-1"], bottomData[0]["related-image-2"], bottomData[0]["related-image-3"]);
 
         // create array of related links to initialise with
         relatedProductLinks.push(topData[0]["related-url-1"], topData[0]["related-url-2"], topData[0]["related-url-3"], bottomData[0]["related-url-1"], bottomData[0]["related-url-2"], bottomData[0]["related-url-3"]);
 
-        for (var i=0; i < relatedProducts.length; i++) {
-
-            // assign different class to top and bottom products
-            var productClass = i < 3 ? "top-product" : "bottom-product";
-
-            // append related products to collection
-            $(".collection").append("<a href='" + relatedProductLinks[i] + "'><div class='collection--item " + productClass +"'><img src='/static/public/images/" + relatedProducts[i] + "'/><div class='view-button' href='" + relatedProductLinks[i] + "'>Shop on lyst&nbsp;&nbsp;&nbsp;></div></div></a>");
-        }
+        flipbook.insertRelatedProducts(relatedProductImages, relatedProductLinks);
 
     },
 
@@ -95,7 +87,7 @@ var flipbook = {
 
     flip: function flip (direction, section, data) {
         var pageImages = [];
-        var relatedProducts = [];
+        var relatedProductImages = [];
         var relatedProductLinks = [];
 
         var currentIndex = parseInt($("#" + section + "-image").attr("class"));
@@ -104,30 +96,22 @@ var flipbook = {
         // push images and links to relevant arrays
         data.forEach(function(page) {
             pageImages.push(page.image);
-            relatedProducts.push([page["related-image-1"], page["related-image-2"], page["related-image-3"]]);
+            relatedProductImages.push([page["related-image-1"], page["related-image-2"], page["related-image-3"]]);
             relatedProductLinks.push([page["related-url-1"], page["related-url-2"], page["related-url-3"]]);
         });
 
+        nextIndex = flipbook.determineNextPage(currentIndex, relatedProductImages, direction);
 
-        // determine index of next flipbook page
-        if (direction === "left") {
-            if (currentIndex === 0) {
-                nextIndex = pageImages.length - 1;
-            } else {
-                nextIndex = currentIndex - 1;
-            }
-        } else {
-            if (currentIndex === pageImages.length - 1) {
-                nextIndex = 0;
-            } else {
-                nextIndex = currentIndex + 1;
-            }
-        }
+        flipbook.insertPage(section, nextIndex, pageImages);
 
-        // update page image
+        flipbook.insertRelatedProducts(relatedProductImages[nextIndex], relatedProductLinks[nextIndex], section);
+
+    },
+
+    insertPage: function insertPage(section, nextIndex, pageImages) {
+
+        // inserts main page image for flipbook
         $("#" + section + "-image").attr("src", "/static/public/images/" + pageImages[nextIndex]).removeClass().addClass(nextIndex.toString());
-
-        flipbook.insertRelatedProducts(relatedProducts[nextIndex], relatedProductLinks[nextIndex], section);
 
     },
 
@@ -138,7 +122,7 @@ var flipbook = {
         $("." + section + "-product").remove();
 
         // insert new related products
-        for (var i=0; i < 3; i++) {
+        for (var i=0; i < images.length; i++) {
             var content = "<a href='" + links[i] + "'><div class='collection--item " + productClass + "'><img src='/static/public/images/" + images[i] + "'/><div class='view-button' href='" + links[i] + "'>Shop on lyst&nbsp;&nbsp;&nbsp;></div></div></a>";
 
             if (section === "top") {
@@ -146,9 +130,29 @@ var flipbook = {
             } else {
                 $(".collection").append(content);
             }
-
         }
 
+    },
+
+    determineNextPage: function determineNextPage(currentIndex, images, direction) {
+        var nextIndex;
+
+        // determine index number of next flipbook page
+        if (direction === "left") {
+            if (currentIndex === 0) {
+                nextIndex = images.length - 1;
+            } else {
+                nextIndex = currentIndex - 1;
+            }
+        } else {
+            if (currentIndex === images.length - 1) {
+                nextIndex = 0;
+            } else {
+                nextIndex = currentIndex + 1;
+            }
+        }
+
+        return nextIndex;
     }
 
 };

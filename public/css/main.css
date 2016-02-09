@@ -205,12 +205,20 @@ button {
     margin: 15px;
     position: relative;
     width: 250px; }
+    @media (max-width: 600px) {
+      .collection .collection--item {
+        height: 200px;
+        width: 150px; } }
     .collection .collection--item:hover .view-button {
       display: block; }
     .collection .collection--item img {
       height: 300px;
       width: 250px;
       object-fit: cover; }
+      @media (max-width: 600px) {
+        .collection .collection--item img {
+          height: 200px;
+          width: 150px; } }
     .collection .collection--item .view-button {
       background-color: #404040;
       bottom: 0;

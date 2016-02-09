@@ -122,6 +122,11 @@
         position: relative;
         width: 250px;
 
+        @media (max-width: 600px) {
+            height: 200px;
+            width: 150px;
+        }
+
         &:hover .view-button {
             display: block;
         }
@@ -130,6 +135,11 @@
             height: 300px;
             width: 250px;
             object-fit: cover;
+
+            @media (max-width: 600px) {
+                height: 200px;
+                width: 150px;
+            }
         }
 
         .view-button {
