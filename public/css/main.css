@@ -219,6 +219,10 @@ button {
         .collection .collection--item img {
           height: 200px;
           width: 150px; } }
+      @media (max-width: 400px) {
+        .collection .collection--item img {
+          height: 180px;
+          width: 120px; } }
     .collection .collection--item .view-button {
       background-color: #404040;
       bottom: 0;
