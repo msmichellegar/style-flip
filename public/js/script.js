@@ -49,15 +49,11 @@ var flipbook = {
         var relatedProductImages = [];
         var relatedProductLinks = [];
 
+        flipbook.getRelatedProductImages(topData)[0].concat(flipbook.getRelatedProductImages(bottomData)[0]);
+        flipbook.getRelatedProductLinks(topData)[0].concat(flipbook.getRelatedProductLinks(bottomData)[0]);
+
         flipbook.insertPage("top", "0", [topData[0].image]);
         flipbook.insertPage("bottom", "0", [bottomData[0].image]);
-
-        // create array of related products to initialise with
-        relatedProductImages.push(topData[0]["related-image-1"], topData[0]["related-image-2"], topData[0]["related-image-3"], bottomData[0]["related-image-1"], bottomData[0]["related-image-2"], bottomData[0]["related-image-3"]);
-
-        // create array of related links to initialise with
-        relatedProductLinks.push(topData[0]["related-url-1"], topData[0]["related-url-2"], topData[0]["related-url-3"], bottomData[0]["related-url-1"], bottomData[0]["related-url-2"], bottomData[0]["related-url-3"]);
-
         flipbook.insertRelatedProducts(relatedProductImages, relatedProductLinks);
 
     },
@@ -86,21 +82,12 @@ var flipbook = {
     },
 
     flip: function flip (direction, section, data) {
-        var pageImages = [];
-        var relatedProductImages = [];
-        var relatedProductLinks = [];
+        var pageImages = flipbook.getPageImages(data);
+        var relatedProductImages = flipbook.getRelatedProductImages(data);
+        var relatedProductLinks = flipbook.getRelatedProductLinks(data);
 
         var currentIndex = parseInt($("#" + section + "-image").attr("class"));
-        var nextIndex;
-
-        // push images and links to relevant arrays
-        data.forEach(function(page) {
-            pageImages.push(page.image);
-            relatedProductImages.push([page["related-image-1"], page["related-image-2"], page["related-image-3"]]);
-            relatedProductLinks.push([page["related-url-1"], page["related-url-2"], page["related-url-3"]]);
-        });
-
-        nextIndex = flipbook.determineNextPage(currentIndex, relatedProductImages, direction);
+        var nextIndex = flipbook.determineNextPage(currentIndex, relatedProductImages, direction);
 
         flipbook.insertPage(section, nextIndex, pageImages);
 
@@ -153,6 +140,38 @@ var flipbook = {
         }
 
         return nextIndex;
+    },
+
+    getPageImages: function getPageImages(data) {
+        var pageImages = [];
+
+        data.forEach(function(page) {
+            pageImages.push(page.image);
+        });
+
+        return pageImages;
+    },
+
+    getRelatedProductImages: function getRelatedProductImages(data) {
+        var relatedProductImages = [];
+
+        // push related product images to array
+        data.forEach(function(page) {
+            relatedProductImages.push([page["related-image-1"], page["related-image-2"], page["related-image-3"]]);
+        });
+
+        return relatedProductImages;
+    },
+
+    getRelatedProductLinks: function getRelatedProductLinks(data) {
+        var relatedProductLinks = [];
+
+        // push related product links to array
+        data.forEach(function(page) {
+            relatedProductLinks.push([page["related-url-1"], page["related-url-2"], page["related-url-3"]]);
+        });
+
+        return relatedProductLinks;
     }
 
 };
