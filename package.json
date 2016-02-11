@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node test/*",
+    "test": "node test/tests.js",
     "start": "node server.js",
     "sass": "sass --watch ./public/css/sass/main.scss:./public/css/main.css"
   },
