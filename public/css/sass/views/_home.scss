@@ -37,6 +37,7 @@
     background-color: white;
     margin: 50px auto 100px auto;
     max-width: 1000px;
+    min-height: 100vh;
     padding-top: 70px;
     text-align: center;
 
@@ -54,6 +55,7 @@
 }
 
 .flipbook-wrapper {
+    display: none;
     margin-top: 50px;
 
     .flipbook {
@@ -108,6 +110,7 @@
 }
 
 .collection-wrapper {
+    display: none;
     margin-top: 50px;
     text-align: center;
 }
@@ -126,6 +129,13 @@
 
         @media (max-width: 600px) {
             height: 200px;
+            margin: 5px;
+            width: 150px;
+        }
+
+        @media (max-width: 400px) {
+            height: 200px;
+            margin: 0;
             width: 150px;
         }
 

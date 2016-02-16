@@ -4,6 +4,7 @@ var routes = require('./lib/routes.js');
 
 var server = new Hapi.Server();
 
+
 server.register(Inert, function () {
     server.connection({
         port: process.env.PORT || 8080

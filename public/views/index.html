@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Just a Bit of This With a Bit Of That</title>
         <link rel="stylesheet" href="/static/public/css/main.css">
+        <link rel="stylesheet" href="/static/test/mocha/mocha.css">
         <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0"/>
         <link rel="shortcut icon" href="/static/public/images/favicon.ico" />
@@ -26,13 +27,13 @@
 
                     <div class="flipbook" id="top">
                         <button class="left top"><</button>
-                        <img id="top-image" src="/static/public/images/top-1.jpg"/>
+                        <img id="top-image" src="#"/>
                         <button class="right top">></button>
                     </div>
 
                     <div class="flipbook" id="bottom">
                         <button class="left bottom"><</button>
-                        <img id="bottom-image" src="/static/public/images/bottom-1.jpg"/>
+                        <img id="bottom-image" src="#"/>
                         <button class="right bottom">></button>
                     </div>
 
@@ -43,44 +44,50 @@
                     <div class="collection">
                         <a href='#' class='collection--item top-product'>
                             <div>
-                                <img class="top-product-image" src='/static/public/images/top-1-related-1.jpeg'/>
+                                <img class="top-product-image" src='#'/>
                                 <div class='view-button'>Shop on lyst&nbsp;&nbsp;&nbsp;></div>
                             </div>
                         </a>
                         <a href='#' class='collection--item top-product'>
                             <div>
-                                <img class="top-product-image" src='/static/public/images/top-1-related-2.jpeg'/>
+                                <img class="top-product-image" src='#'/>
                                 <div class='view-button'>Shop on lyst&nbsp;&nbsp;&nbsp;></div>
                             </div>
                         </a>
                         <a href='#' class='collection--item top-product'>
                             <div>
-                                <img class="top-product-image" src='/static/public/images/top-1-related-3.jpeg'/>
+                                <img class="top-product-image" src='#'/>
                                 <div class='view-button'>Shop on lyst&nbsp;&nbsp;&nbsp;></div>
                             </div>
                         </a>
                         <a href='#' class='collection--item bottom-product'>
                             <div>
-                                <img class="bottom-product-image" src='/static/public/images/bottom-1-related-1.jpeg'/>
+                                <img class="bottom-product-image" src='#'/>
                                 <div class='view-button'>Shop on lyst&nbsp;&nbsp;&nbsp;></div>
                             </div>
                         </a>
                         <a href='#' class='collection--item bottom-product'>
                             <div>
-                                <img class="bottom-product-image" src='/static/public/images/bottom-1-related-2.jpeg'/>
+                                <img class="bottom-product-image" src='#'/>
                                 <div class='view-button'>Shop on lyst&nbsp;&nbsp;&nbsp;></div>
                             </div>
                         </a>
                         <a href='#' class='collection--item bottom-product'>
                             <div>
-                                <img class="bottom-product-image" src='/static/public/images/bottom-1-related-3.jpeg'/>
+                                <img class="bottom-product-image" src='#'/>
                                 <div class='view-button'>Shop on lyst&nbsp;&nbsp;&nbsp;></div>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
+        </div></div>
+        <div id="mocha"></div>
         <script src="/static/public/js/script.js"></script>
+        <script src="/static/test/mocha/mocha.js"></script>
+        <script src="http://chaijs.com/chai.js"></script>
+        <script>mocha.setup('bdd')</script>
+        <script src="/static/test/public-tests.js"></script>
+        <script>mocha.run();</script>
     </body>
 </html>

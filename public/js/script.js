@@ -1,24 +1,19 @@
 var flipbook = {
 
-    getData: function getFlipbookData(callbacks) {
+    initialise: function initialise(callbacks) {
 
         var request = new XMLHttpRequest();
         request.open('GET', '/api/flipbook', true);
 
         request.onload = function() {
-          if (request.status >= 200 && request.status < 400) {
-            var data = JSON.parse(request.responseText);
+            if (request.status >= 200 && request.status < 400) {
+                var data = JSON.parse(request.responseText);
 
-            // divides data into top and bottom sections
-            var topData = flipbook.divideData(data)[0];
-            var bottomData = flipbook.divideData(data)[1];
+                // run supplied callback functions
+                flipbook.loadFirstPage(data);
+                flipbook.enableFlipping(data);
 
-            // run supplied callback functions
-            callbacks.forEach(function(callback) {
-                callback(topData, bottomData);
-            });
-
-          }
+            }
         };
 
         request.send();
@@ -44,25 +39,33 @@ var flipbook = {
 
     },
 
-    initialise: function initialiseFlipBook(topData, bottomData) {
+    loadFirstPage: function loadFirstPage(data) {
+        var dividedData = flipbook.divideData(data);
 
-        for (var i=0; i < arguments.length; i++) {
-            var relatedProductImages = flipbook.getRelatedProductImages(arguments[i])[0];
-            var relatedProductLinks = flipbook.getRelatedProductLinks(arguments[i])[0];
+        // insert page and related products for top then bottom
+        for (var i=0; i < dividedData.length; i++) {
+            var relatedProductImages = flipbook.getRelatedProductImages(dividedData[i])[0];
+            var relatedProductLinks = flipbook.getRelatedProductLinks(dividedData[i])[0];
 
             if (i === 0) {
-                flipbook.insertPage("top", "0", [arguments[i][0].image]);
+                flipbook.insertPage("top", "0", [dividedData[i][0].image]);
                 flipbook.insertRelatedProducts(relatedProductImages, relatedProductLinks, "top");
             } else {
-                flipbook.insertPage("bottom", "0", [arguments[i][0].image]);
+                flipbook.insertPage("bottom", "0", [dividedData[i][0].image]);
                 flipbook.insertRelatedProducts(relatedProductImages, relatedProductLinks, "bottom");
             }
 
         }
 
+        document.querySelector(".flipbook-wrapper").style.display = "block";
+        document.querySelector(".collection-wrapper").style.display = "block";
+
     },
 
-    enableFlipping: function enableFlipping(topData, bottomData) {
+    enableFlipping: function enableFlipping(data) {
+        var topData = flipbook.divideData(data)[0];
+        var bottomData = flipbook.divideData(data)[1];
+
         var leftButtons = document.querySelectorAll(".left");
         var rightButtons = document.querySelectorAll(".right");
 
@@ -196,4 +199,4 @@ var flipbook = {
 
 };
 
-flipbook.getData([flipbook.initialise, flipbook.enableFlipping]);
+flipbook.initialise();
