@@ -43,7 +43,7 @@ describe("db.js", function() {
 });
 
 describe("api.js", function() {
-    describe("#getFlipbookData", function() {
+    describe("#getFlipbookData()", function() {
         it("returns an array", function(done) {
             api.getFlipbookData(function(err, data) {
                 assert.equal(Array.isArray(data), true);

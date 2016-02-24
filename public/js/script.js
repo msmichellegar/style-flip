@@ -1,6 +1,6 @@
 var flipbook = {
 
-    initialise: function initialise(callbacks) {
+    initialise: function(callbacks) {
 
         var request = new XMLHttpRequest();
         request.open('GET', '/api/flipbook', true);
@@ -20,7 +20,7 @@ var flipbook = {
 
     },
 
-    divideData: function divideFlipbookData(data) {
+    divideData: function(data) {
         var topData = [];
         var bottomData = [];
 
@@ -39,7 +39,7 @@ var flipbook = {
 
     },
 
-    loadFirstPage: function loadFirstPage(data) {
+    loadFirstPage: function(data) {
         var dividedData = flipbook.divideData(data);
 
         // insert page and related products for top then bottom
@@ -62,7 +62,7 @@ var flipbook = {
 
     },
 
-    enableFlipping: function enableFlipping(data) {
+    enableFlipping: function(data) {
         var topData = flipbook.divideData(data)[0];
         var bottomData = flipbook.divideData(data)[1];
 
@@ -93,7 +93,7 @@ var flipbook = {
 
     },
 
-    flip: function flip (direction, section, data) {
+    flip: function(direction, section, data) {
         var pageImages = flipbook.getPageImages(data);
         var relatedProductImages = flipbook.getRelatedProductImages(data);
         var relatedProductLinks = flipbook.getRelatedProductLinks(data);
@@ -108,7 +108,7 @@ var flipbook = {
 
     },
 
-    insertPage: function insertPage(section, nextIndex, pageImages) {
+    insertPage: function(section, nextIndex, pageImages) {
         var pageNode = document.querySelector("#" + section + "-image");
 
         // removes class if one is assigned
@@ -125,7 +125,7 @@ var flipbook = {
 
     },
 
-    insertRelatedProducts: function insertRelatedProducts(images, links, section) {
+    insertRelatedProducts: function(images, links, section) {
         var productClass = section === "top" ? "top-product" : "bottom-product";
         var productNodes = document.querySelectorAll("." + productClass);
         var imageNodes = document.querySelectorAll("." + productClass + "-image");
@@ -143,7 +143,7 @@ var flipbook = {
 
     },
 
-    determineNextPage: function determineNextPage(currentIndex, images, direction) {
+    determineNextPage: function(currentIndex, images, direction) {
         var nextIndex;
 
         // determines index number of next flipbook page
@@ -164,7 +164,7 @@ var flipbook = {
         return nextIndex;
     },
 
-    getPageImages: function getPageImages(data) {
+    getPageImages: function(data) {
         var pageImages = [];
 
         // pushes flipbook pages for section to array
@@ -175,7 +175,7 @@ var flipbook = {
         return pageImages;
     },
 
-    getRelatedProductImages: function getRelatedProductImages(data) {
+    getRelatedProductImages: function(data) {
         var relatedProductImages = [];
 
         // pushes related product images to array
@@ -186,7 +186,7 @@ var flipbook = {
         return relatedProductImages;
     },
 
-    getRelatedProductLinks: function getRelatedProductLinks(data) {
+    getRelatedProductLinks: function(data) {
         var relatedProductLinks = [];
 
         // pushes related product links to array

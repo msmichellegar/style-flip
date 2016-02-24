@@ -96,8 +96,8 @@ i {
   color: grey; }
 
 button {
-  background: #000;
-  border: 2px solid #000;
+  background: #414141;
+  border: none;
   border-radius: 0;
   color: white;
   cursor: pointer;
@@ -110,9 +110,8 @@ button {
   text-transform: lowercase;
   -webkit-appearance: button; }
 
-.checkout-button {
-  float: right;
-  width: 200px; }
+button:hover {
+  background: black; }
 
 .page-wrapper {
   background-color: #F2F2F2;
@@ -135,6 +134,9 @@ button {
 
 .menu {
   margin: 50px 0 0 150px; }
+  .menu a {
+    color: white;
+    text-decoration: none; }
   .menu h3 {
     color: white; }
   .menu span {
@@ -193,7 +195,7 @@ button {
         .flipbook-wrapper .flipbook img {
           width: 100%; } }
   .flipbook-wrapper #top {
-    margin-bottom: 10px; }
+    margin-bottom: 5px; }
 
 .collection-wrapper {
   display: none;
@@ -201,7 +203,8 @@ button {
   text-align: center; }
 
 .collection {
-  margin-top: 30px; }
+  margin-top: 30px;
+  padding-bottom: 50px; }
   .collection .collection--item {
     background-color: white;
     cursor: pointer;

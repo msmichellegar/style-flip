@@ -1,6 +1,6 @@
 button {
-    background: #000;
-    border: 2px solid #000;
+    background: #414141;
+    border: none;
     border-radius: 0;
     color: white;
     cursor: pointer;
@@ -14,7 +14,6 @@ button {
     -webkit-appearance: button;
 }
 
-.checkout-button {
-    float: right;
-    width: 200px;
+button:hover {
+    background: black;
 }
