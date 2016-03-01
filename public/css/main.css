@@ -158,6 +158,11 @@ button:hover {
     height: 3px;
     margin: 15px auto;
     width: 40px; }
+  .content-wrapper p {
+    line-height: 1.25;
+    margin: 0 auto;
+    max-width: 800px;
+    padding-top: 20px; }
 
 .flipbook-wrapper {
   display: none;
