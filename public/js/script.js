@@ -12,7 +12,8 @@ function initialise() {
             loadFirstPage(data);
             enableFlipping(data);
 
-            // tells any curious individuals with dev tools to hire me
+            // extra info for curious individuals with dev tools
+            console.log("Find full source code on GitHub: http://www.github.com/msmichellegar/style-flip/");
             console.log("Please hire me :) http://msmichellegar.github.io/");
 
         }
